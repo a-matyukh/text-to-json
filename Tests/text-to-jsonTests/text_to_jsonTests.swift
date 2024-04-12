@@ -8,5 +8,8 @@ final class text_to_jsonTests: XCTestCase {
         print("Get this resulted json:")
         print(result)
         
+        print(Steps.self)
+        print(Step.self)
+        
     }
 }
