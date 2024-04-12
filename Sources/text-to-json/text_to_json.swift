@@ -1,7 +1,7 @@
 import Foundation
 import llmfarm_core
 
-let maxOutputLength = 256
+let maxOutputLength = 4096
 var total_output = 0
 
 func mainCallback(_ str: String, _ time: Double) -> Bool {
@@ -32,11 +32,11 @@ public func generate_steps(from: String, modelPath: String, grammarPath: String)
     let output = try? ai.model.predict(from, mainCallback)
     
     do {
-        let generated_json = """
-        {"steps": [{"step_name": "Fake step","step_description": "Fake description"}]}
-        """.data(using: .utf8)!
-        let decodedSteps = try JSONDecoder().decode(StepsJSON.self, from: generated_json)
-        return decodedSteps.steps
+        if output != nil {
+            let generated_json = output!.data(using: .utf8)!
+            let decodedSteps = try JSONDecoder().decode(StepsJSON.self, from: generated_json)
+            return decodedSteps.steps
+        }
     } catch {
         print("Decode failed: \(error.localizedDescription)")
     }
