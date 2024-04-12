@@ -15,28 +15,21 @@ func mainCallback(_ str: String, _ time: Double) -> Bool {
 
 public func generate_steps(from: String, modelPath: String, grammarPath: String) -> [GeneratedStep] {
     
-    print("Get this subtitles:")
-    print(from)
-    
-    print(modelPath)
     let ai = AI(_modelPath: modelPath, _chatName: "chat")
     
     var params:ModelAndContextParams = .default
     params.promptFormat = .Custom
     params.custom_prompt_format = """
-    SYSTEM: You are a helpful, respectful and honest assistant.
+    SYSTEM: Create step-by-step instructions from user prompt.
     USER: {prompt}
     ASSISTANT:
     """
-    var input_text = "State the meaning of life"
     params.use_metal = true
+    params.grammar_path = grammarPath
 
     _ = try? ai.loadModel_sync(ModelInference.LLama_gguf,contextParams: params)
 
-    let output = try? ai.model.predict(input_text, mainCallback)
-    
-//    print(grammarPath)
-    
+    let output = try? ai.model.predict(from, mainCallback)
     
     do {
         let generated_json = """
