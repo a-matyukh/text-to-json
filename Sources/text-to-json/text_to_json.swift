@@ -1,32 +1,29 @@
 import Foundation
 import llmfarm_core
 
-public func generate_steps(from: String) -> Steps {
+public func generate_steps(from: String) -> [GeneratedStep] {
     
     print("Get this subtitles:")
     print(from)
     
     do {
         let generated_json = """
-        {"steps": [{"step_name": "wau","step_description": "camon"}]}
+        {"steps": [{"step_name": "Fake step","step_description": "Fake description"}]}
         """.data(using: .utf8)!
-        
-        let decodedSteps = try JSONDecoder().decode(Steps.self, from: generated_json)
-        print(decodedSteps)
-        return decodedSteps
+        let decodedSteps = try JSONDecoder().decode(StepsJSON.self, from: generated_json)
+        return decodedSteps.steps
     } catch {
         print("Check out failed: \(error.localizedDescription)")
     }
 
-    let step = Step(step_name: "Something went wrong", step_description: "Try again")
-    return Steps(steps: [step])
+    return [GeneratedStep(step_name: "Something went wrong", step_description: "Try again")]
     
 }
 
-public struct Steps: Codable {
-    public let steps: [Step]
+public struct StepsJSON: Codable {
+    public let steps: [GeneratedStep]
 }
-public struct Step: Codable {
+public struct GeneratedStep: Codable {
     public let step_name: String
     public let step_description: String
 }
