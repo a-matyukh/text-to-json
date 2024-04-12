@@ -7,7 +7,9 @@ public func generate_steps(from: String, modelPath: String, grammarPath: String)
     print(from)
     
     print(modelPath)
-    print(grammarPath)
+    let ai = AI(_modelPath: modelPath, _chatName: "chat")
+    print(ai)
+//    print(grammarPath)
     
     
     do {
