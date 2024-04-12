@@ -11,10 +11,10 @@ public func generate_steps(from: String) -> String {
     
 }
 
-struct Steps: Codable {
+public struct Steps: Codable {
     let steps: [Step]
 }
-struct Step: Codable {
+public struct Step: Codable {
     let step_name: String
     let step_description: String
 }
