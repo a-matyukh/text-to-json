@@ -5,11 +5,8 @@ final class text_to_jsonTests: XCTestCase {
     func testExample() throws {
 
         let result = generate_steps(from: "hihi")
-        print("Get this resulted json:")
+        print("Get this resulte:")
         print(result)
-        
-        print(Steps.self)
-        print(Step.self)
         
     }
 }

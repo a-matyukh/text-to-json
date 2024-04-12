@@ -1,10 +1,14 @@
 import Foundation
 import llmfarm_core
 
-public func generate_steps(from: String) -> [GeneratedStep] {
+public func generate_steps(from: String, modelPath: String, grammarPath: String) -> [GeneratedStep] {
     
     print("Get this subtitles:")
     print(from)
+    
+    print(modelPath)
+    print(grammarPath)
+    
     
     do {
         let generated_json = """
@@ -13,7 +17,7 @@ public func generate_steps(from: String) -> [GeneratedStep] {
         let decodedSteps = try JSONDecoder().decode(StepsJSON.self, from: generated_json)
         return decodedSteps.steps
     } catch {
-        print("Check out failed: \(error.localizedDescription)")
+        print("Decode failed: \(error.localizedDescription)")
     }
 
     return [GeneratedStep(step_name: "Something went wrong", step_description: "Try again")]
