@@ -19,6 +19,7 @@ public func generate_steps(from: String, modelPath: String, grammarPath: String)
     
     var params:ModelAndContextParams = .default
     params.promptFormat = .Custom
+    params.context = 8192
     params.custom_prompt_format = """
     SYSTEM: Create step-by-step instructions from user prompt.
     USER: {prompt}
