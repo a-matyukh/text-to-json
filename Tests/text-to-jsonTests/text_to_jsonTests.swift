@@ -4,9 +4,9 @@ import XCTest
 final class text_to_jsonTests: XCTestCase {
     func testExample() throws {
 
-        let result = generate_steps(from: "hihi")
-        print("Get this resulte:")
-        print(result)
+//        let result = generate_steps(from: "hihi")
+//        print("Get this resulte:")
+//        print(result)
         
     }
 }

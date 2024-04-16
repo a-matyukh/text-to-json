@@ -13,7 +13,7 @@ func mainCallback(_ str: String, _ time: Double) -> Bool {
     return false
 }
 
-public func generate_steps(from: String, modelPath: String, grammarPath: String) -> [GeneratedStep] {
+public func generate_steps(from: String, modelPath: String) -> [GeneratedStep] {
     
     let ai = AI(_modelPath: modelPath, _chatName: "chat")
     
@@ -26,7 +26,9 @@ public func generate_steps(from: String, modelPath: String, grammarPath: String)
     ASSISTANT:
     """
     params.use_metal = true
-    params.grammar_path = grammarPath
+    
+    let grammar_path = Bundle.module.path(forResource: "steps", ofType: "gbnf")!
+    params.grammar_path = grammar_path
 
     _ = try? ai.loadModel_sync(ModelInference.LLama_gguf,contextParams: params)
 

@@ -22,7 +22,8 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "text-to-json",
-            dependencies: [.product(name: "llmfarm_core", package: "llmfarm_core.swift")]
+            dependencies: [.product(name: "llmfarm_core", package: "llmfarm_core.swift")],
+            resources: [.process("steps.gbnf")]
         ),
         .testTarget(
             name: "text-to-jsonTests",
